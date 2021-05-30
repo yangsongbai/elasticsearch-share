@@ -136,6 +136,104 @@ GET _cat/nodes?v&format=txt
 &emsp;&emsp;索引存在副本分片（shard）没有被分配；      
 **red**    
 &emsp;&emsp;索引存在主分片（shard）没有被分配； 
+
+查看索引表的状态
+```
+GET _cat/indices?health=green
+GET _cat/indices/elasticsearch-analyzer-index?health=green
+```
+查看索引的定义信息
+```
+GET elasticsearch-analyzer-index
+GET elasticsearch-analyzer-index?flat_settings&include_defaults
+```
+响应返回
+```
+"elasticsearch-analyzer-index": {
+    "aliases": {
+      "elasticsearch-analyzer-index-alias": {}
+    },
+    "mappings": {
+      "_doc": {
+        "properties": {
+          "author": {
+            "type": "keyword",
+            "ignore_above": 256
+          },
+          "content": {
+            "type": "text",
+            "fields": {
+              "space": {
+                "type": "text",
+                "analyzer": "whitespace"
+              }
+            }
+          },
+          "descripe": {
+            "type": "text",
+            "analyzer": "standard"
+          },
+          "title": {
+            "type": "text",
+            "analyzer": "my_custom_analyzer"
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "provided_name": "elasticsearch-analyzer-index",
+        "creation_date": "1622366213571",
+        "analysis": {
+          "filter": {
+            "english_stop": {
+              "type": "stop",
+              "stopwords": "_english_"
+            }
+          },
+          "char_filter": {
+            "emoticons": {
+              "type": "mapping",
+              "mappings": [
+                ":) => _happy_",
+                ":( => _sad_",
+                "🐂 => 牛"
+              ]
+            }
+          },
+          "analyzer": {
+            "my_custom_analyzer": {
+              "filter": [
+                "lowercase",
+                "english_stop",
+                "asciifolding"
+              ],
+              "char_filter": [
+                "emoticons",
+                "html_strip"
+              ],
+              "type": "custom",
+              "tokenizer": "punctuation"
+            }
+          },
+          "tokenizer": {
+            "punctuation": {
+              "pattern": "[ .,!?。]",
+              "type": "pattern"
+            }
+          }
+        },
+        "number_of_replicas": "0",
+        "uuid": "vQ2TkUx3SNCGjBuJZ6AQKA",
+        "version": {
+          "created": "6040099"
+        }
+      }
+    }
+  }
+```
+
 ## 类型（type）
 &emsp;&emsp;一个类型通常是一个索引的一个逻辑分类或分区，允许在一个索引下存储不同类型的文档（相当于关系型数据库中的一张表）
 ，例如用户类型、订单类型等。目前已经不支持在一个索引下创建多个类型，并且类型概念已经在后续版本中删除，
@@ -164,7 +262,14 @@ GET elasticsearch_study_index/_doc/1
 
 ## 段（segements）
 每个shard分片是一个lucene实例，每个分片由多个segment组成。每个segment占用内存，文件句柄等。   
-服务器总内存除了分配jvm配置的，其余都给了lucene，占用page cache内存，page cache保存对文件数据segment的缓存。free -g可查看内存使用，es节点只有es服务，基本cache就是缓存的segment
+服务器总内存除了分配jvm配置的，其余都给了lucene，占用page cache内存，page cache保存对文件数据segment的缓存。free -g可查看内存使用，es节点只有es服务，基本cache就是缓存的segment。
+
+多个段可以合并，减少磁盘的io。   
+lucene的数据写入会先写如到缓存（buffer）中，当达到一定数量以后，会flush成文一个segment，写入到磁盘当中。每个segement有自己独立的索引，可以单独查询。   
+segment不会被修改，数据的的写入都是进行批量的追加，避免了随机写的存在，提高了吞吐量。segement可以被删除，但也不是修改segement文件，
+而是由另外的文件记录需要被删除的documentId。    
+index的查询是对多个segement文件的查询，其中也包含了处理被删除文件的处理，并对查询结果进行合并。为了进行查询优化，lucene有策略对多个segment进行优化。   
+
 ```
 #查看集群所有索引segements的情况
 GET _cat/segments?v
