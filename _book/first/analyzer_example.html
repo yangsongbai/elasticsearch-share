@@ -289,7 +289,166 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x5206;&#x8BCD;&#x5668;"><b>1. </b>&#x5206;&#x8BCD;&#x5668;</a></li></ul></div><a href="#&#x5206;&#x8BCD;&#x5668;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x5206;&#x8BCD;&#x5668;"><a name="&#x5206;&#x8BCD;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x5206;&#x8BCD;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x5206;&#x8BCD;&#x5668;</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x5206;&#x8BCD;&#x5668;"><b>1. </b>&#x5206;&#x8BCD;&#x5668;</a></li><ul><li><span class="title-icon "></span><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;"><b>1.1. </b>&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;</a></li></ul></ul></div><a href="#&#x5206;&#x8BCD;&#x5668;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x5206;&#x8BCD;&#x5668;"><a name="&#x5206;&#x8BCD;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x5206;&#x8BCD;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x5206;&#x8BCD;&#x5668;</h1>
+<h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;"><a name="&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;" class="anchor-navigation-ex-anchor" href="#&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. &#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;</h2>
+<pre><code>PUT elasticsearch-analyzer-index
+{
+  &quot;settings&quot;: {
+    &quot;analysis&quot;: {
+      &quot;analyzer&quot;: {
+        &quot;my_custom_analyzer&quot;: {
+          &quot;type&quot;: &quot;custom&quot;,
+          &quot;char_filter&quot;: [
+            &quot;emoticons&quot; ,
+            &quot;html_strip&quot;
+          ],
+          &quot;tokenizer&quot;: &quot;punctuation&quot;, 
+          &quot;filter&quot;: [
+            &quot;lowercase&quot;,
+            &quot;english_stop&quot;,
+            &quot;asciifolding&quot;
+          ]
+        }
+      },
+      &quot;tokenizer&quot;: {
+        &quot;punctuation&quot;: { 
+          &quot;type&quot;: &quot;pattern&quot;,
+          &quot;pattern&quot;: &quot;[ .,!?&#x3002;]&quot;
+        }
+      },
+      &quot;char_filter&quot;: {
+        &quot;emoticons&quot;: { 
+          &quot;type&quot;: &quot;mapping&quot;,
+          &quot;mappings&quot;: [
+            &quot;:) =&gt; _happy_&quot;,
+            &quot;:( =&gt; _sad_&quot;,
+            &quot;&#x1F402; =&gt; &#x725B;&quot;
+          ]
+        }
+      },
+      &quot;filter&quot;: {
+        &quot;english_stop&quot;: { 
+          &quot;type&quot;: &quot;stop&quot;,
+          &quot;stopwords&quot;: &quot;_english_&quot;
+        }
+      }
+    }
+  },
+  &quot;mappings&quot;: {
+      &quot;_doc&quot;: {
+        &quot;properties&quot;: {
+          &quot;title&quot;: {
+              &quot;type&quot;: &quot;text&quot;,
+              &quot;analyzer&quot;: &quot;my_custom_analyzer&quot;,
+              &quot;search_analyzer&quot;: &quot;my_custom_analyzer&quot;
+          },
+          &quot;author&quot;:{
+              &quot;type&quot;: &quot;keyword&quot;,
+             &quot;ignore_above&quot;: 256
+          },
+          &quot;content&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;fields&quot;: {
+              &quot;space&quot;: {
+                &quot;type&quot;: &quot;text&quot;,
+                &quot;analyzer&quot;: &quot;whitespace&quot;
+              }
+            }
+          },
+          &quot;descripe&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;analyzer&quot;: &quot;standard&quot;
+          }
+        }
+      }
+    }
+}
+</code></pre><p>&#x68C0;&#x6D4B;&#x5206;&#x8BCD;&#x7ED3;&#x679C;  </p>
+<pre><code>POST elasticsearch-analyzer-index/_analyze
+{
+  &quot;analyzer&quot;: &quot;my_custom_analyzer&quot;,
+  &quot;text&quot;:     &quot;I&apos;m a :) person, and you?&lt;p&gt;&#x597D;&#x672A;&#x6765;&#x1F402;&lt;/p&gt;&quot;
+}
+
+POST elasticsearch-analyzer-index/_analyze
+{
+  &quot;analyzer&quot;: &quot;my_custom_analyzer&quot;,
+  &quot;text&quot;: &quot;Is this &lt;b&gt;d&#xE9;j&#xE0; vu&lt;/b&gt;?&quot;
+}
+</code></pre><p>&#x54CD;&#x5E94;&#x7ED3;&#x5982;&#x4E0B;  </p>
+<pre><code>{
+  &quot;tokens&quot;: [
+    {
+      &quot;token&quot;: &quot;i&apos;m&quot;,
+      &quot;start_offset&quot;: 0,
+      &quot;end_offset&quot;: 3,
+      &quot;type&quot;: &quot;word&quot;,
+      &quot;position&quot;: 0
+    },
+    {
+      &quot;token&quot;: &quot;_happy_&quot;,
+      &quot;start_offset&quot;: 6,
+      &quot;end_offset&quot;: 8,
+      &quot;type&quot;: &quot;word&quot;,
+      &quot;position&quot;: 2
+    },
+    {
+      &quot;token&quot;: &quot;person&quot;,
+      &quot;start_offset&quot;: 9,
+      &quot;end_offset&quot;: 15,
+      &quot;type&quot;: &quot;word&quot;,
+      &quot;position&quot;: 3
+    },
+    {
+      &quot;token&quot;: &quot;you&quot;,
+      &quot;start_offset&quot;: 21,
+      &quot;end_offset&quot;: 24,
+      &quot;type&quot;: &quot;word&quot;,
+      &quot;position&quot;: 5
+    },
+    {
+      &quot;token&quot;: &quot;&quot;&quot;
+
+&#x597D;&#x672A;&#x6765;&#x725B;
+
+&quot;&quot;&quot;,
+      &quot;start_offset&quot;: 25,
+      &quot;end_offset&quot;: 37,
+      &quot;type&quot;: &quot;word&quot;,
+      &quot;position&quot;: 6
+    }
+  ]
+}
+</code></pre><p>&#x63D2;&#x5165;&#x6570;&#x636E;   </p>
+<pre><code>POST elasticsearch-analyzer-index/_doc/1
+{
+  &quot;title&quot;: &quot;&#x597D;&#x672A;&#x6765; &#x662F;&#x4E00;&#x4E2A;&#x4EE5;&#x667A;&#x6167;&#x6559;&#x80B2;&#x548C;&#x5F00;&#x653E;&#x5E73;&#x53F0;&#x4E3A;&#x4E3B;&#x4F53;&#xFF0C;I&apos;m a :) person, and you?&lt;p&gt;&#x597D;&#x672A;&#x6765;&#x1F402;&lt;/p&gt;&#x3002;&quot;
+}
+
+POST elasticsearch-analyzer-index/_doc/_bulk?refresh
+{&quot;index&quot;:{}}
+{&quot;author&quot;:&quot;&#x674E;&#x56DB;1&quot; ,&quot;title&quot;: &quot;&#x597D;&#x672A;&#x6765;&#x662F; &#x4E00;&#x4E2A; &#x4EE5; &#x667A;&#x6167;&#x6559;&#x80B2; &#x548C; &#x5F00;&#x653E;&#x5E73;&#x53F0; &#x4E3A; &#x4E3B;&#x4F53;&#x3002;&lt;b&gt;&#x597D;&#x672A;&#x6765;&#x1F402;&lt;/b&gt;&quot;}
+{&quot;index&quot;:{}}
+{&quot;author&quot;:&quot;&#x674E;&#x56DB;2&quot; ,&quot;title&quot;: &quot;&#x597D;&#x672A;&#x6765; &#x662F; &#x4E00;&#x4E2A; &#x4EE5; &#x667A;&#x6167;&#x6559;&#x80B2;&#x548C; &#x5F00;&#x653E;&#x5E73;&#x53F0; &#x4E3A; &#x4E3B;&#x4F53;&#xFF0C;&#x63A2;&#x7D22; &#x672A;&#x6765; &#x6559;&#x80B2; &#x65B0;&#x6A21;&#x5F0F; &#x7684; &#x79D1;&#x6280;&#x6559;&#x80B2; &#x516C;&#x53F8;&#x3002;&quot;}
+</code></pre><p>&#x641C;&#x7D22;</p>
+<pre><code>POST elasticsearch-analyzer-index/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+       &quot;title&quot;: &quot;&#x597D;&#x672A;&#x6765;&#x725B;&quot;
+    }
+  }
+}
+
+POST elasticsearch-analyzer-index/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+       &quot;title&quot;: &quot;&#x597D;&#x672A;&#x6765;&quot;
+    }
+  }
+}
+</code></pre><p><strong>&#x5B98;&#x65B9;&#x6587;&#x6863;</strong><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/analysis.html" target="_blank">analysis</a>    </p>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; Songbai Yang all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
 2021-05-30
 </span></footer>
@@ -351,7 +510,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"分词器","level":"1.2.2","depth":2,"next":{"title":"基本概念","level":"1.2.3","depth":2,"path":"first/basic_concept.md","ref":"first/basic_concept.md","articles":[]},"previous":{"title":"倒排索引在Elasticsearch中的简单","level":"1.2.1","depth":2,"path":"first/invert_index_simple_apply.md","ref":"first/invert_index_simple_apply.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","expandable-chapters","hide-element","github","github-buttons","sharing-plus","anchor-navigation-ex","code","lightbox","tbfed-pagefooter","copy-code-button","search-plus","back-to-top-button","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy Songbai Yang","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD"},"github":{"url":"https://github.com/yangsongbai"},"livereload":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"lightbox":{"jquery":true,"sameUuid":false},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"yangsongbai","repo":"elasticsearch-share","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"expandable-chapters":{},"search-plus":{}},"theme":"default","author":"杨松柏","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"elastscsearch-share","language":"zh-hans","links":{"sidebar":{"CSDN博客":"https://blog.csdn.net/yang52017","个人微信公众号":"https://mp.weixin.qq.com/s/6J7d4EVw6uX3Im9sbXW6WQ"}},"gitbook":"3.2.3","sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"anchor-navigation-ex":{"showLevel":false,"isShowTocTitleIcon":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right"},"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"description":"简单描素"},"file":{"path":"first/analyzer_example.md","mtime":"2021-05-30T08:33:31.532Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-30T07:54:25.271Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"分词器","level":"1.2.2","depth":2,"next":{"title":"基本概念","level":"1.2.3","depth":2,"path":"first/basic_concept.md","ref":"first/basic_concept.md","articles":[]},"previous":{"title":"倒排索引在Elasticsearch中的简单","level":"1.2.1","depth":2,"path":"first/invert_index_simple_apply.md","ref":"first/invert_index_simple_apply.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","expandable-chapters","hide-element","github","github-buttons","sharing-plus","anchor-navigation-ex","code","lightbox","tbfed-pagefooter","copy-code-button","search-plus","back-to-top-button","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy Songbai Yang","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD"},"github":{"url":"https://github.com/yangsongbai"},"livereload":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"lightbox":{"jquery":true,"sameUuid":false},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"yangsongbai","repo":"elasticsearch-share","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"expandable-chapters":{},"search-plus":{}},"theme":"default","author":"杨松柏","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"elastscsearch-share","language":"zh-hans","links":{"sidebar":{"CSDN博客":"https://blog.csdn.net/yang52017","个人微信公众号":"https://mp.weixin.qq.com/s/6J7d4EVw6uX3Im9sbXW6WQ"}},"gitbook":"3.2.3","sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"anchor-navigation-ex":{"showLevel":false,"isShowTocTitleIcon":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right"},"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"description":"简单描素"},"file":{"path":"first/analyzer_example.md","mtime":"2021-05-30T09:17:59.878Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-30T07:54:25.271Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
