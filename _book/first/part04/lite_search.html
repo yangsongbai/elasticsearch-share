@@ -482,6 +482,8 @@
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-uri-request.html" target="_blank">URI Search</a> 
 <a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/search-lite.html" target="_blank">&#x8F7B;&#x91CF;&#x641C;&#x7D22;</a>     </p>
 <pre><code>GET cars/_search?q=color:red
+
+GET cars/_search?q=color:red&amp;analyzer=whitespace&amp;df=make
 </code></pre><p>uri&#x652F;&#x6301;&#x7684;&#x53C2;&#x6570;  </p>
 <table>
 <thead>
@@ -497,18 +499,82 @@
 </tr>
 <tr>
 <td style="text-align:center">df</td>
-<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#xFF08;Database&#xFF09;</td>
+<td style="text-align:center">&#x67E5;&#x8BE2;&#x4E2D;&#x672A;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;&#x524D;&#x7F00;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x9ED8;&#x8BA4;&#x5B57;&#x6BB5;</td>
 </tr>
 <tr>
 <td style="text-align:center">analyzer</td>
-<td style="text-align:center">&#x4E00;&#x884C;&#x6570;&#x636E;&#xFF08;Row&#xFF09;</td>
+<td style="text-align:center">&#x5206;&#x6790;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#x8981;&#x4F7F;&#x7528;&#x7684;&#x5206;&#x6790;&#x5668;&#x540D;&#x79F0;&#x3002;</td>
 </tr>
 <tr>
 <td style="text-align:center">analyze_wildcard</td>
+<td style="text-align:center">&#x662F;&#x5426;&#x5E94;&#x8BE5;&#x5206;&#x6790;&#x901A;&#x914D;&#x7B26;&#x548C;&#x524D;&#x7F00;&#x67E5;&#x8BE2;&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;false&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">batched_reduce_size</td>
+<td style="text-align:center">&#x534F;&#x8C03;&#x8282;&#x70B9;&#x4E0A;&#x5E94;&#x7ACB;&#x5373;&#x51CF;&#x5C11;&#x7684;&#x788E;&#x7247;&#x7ED3;&#x679C;&#x6570;.&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x4E2D;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x5927;&#x91CF;shard&#xFF0C;&#x5219;&#x5E94;&#x5C06;&#x6B64;&#x503C;&#x7528;&#x4F5C;&#x4FDD;&#x62A4;&#x673A;&#x5236;&#xFF0C;&#x4EE5;&#x51CF;&#x5C11;&#x6BCF;&#x4E2A;&#x641C;&#x7D22;&#x8BF7;&#x6C42;&#x7684;&#x5185;&#x5B58;&#x5F00;&#x9500;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">default_operator</td>
+<td style="text-align:center">&#x8981;&#x4F7F;&#x7528;&#x7684;&#x9ED8;&#x8BA4;&#x8FD0;&#x7B97;&#x7B26;&#x53EF;&#x4EE5;&#x662F;AND&#x6216;OR&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;OR&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">lenient</td>
+<td style="text-align:center">&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;true&#xFF0C;&#x5C06;&#x5BFC;&#x81F4;&#x5FFD;&#x7565;&#x57FA;&#x4E8E;&#x683C;&#x5F0F;&#x7684;&#x5931;&#x8D25;&#xFF08;&#x5982;&#x5411;&#x6570;&#x5B57;&#x5B57;&#x6BB5;&#x63D0;&#x4F9B;&#x6587;&#x672C;&#xFF09;&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;false&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">explain</td>
+<td style="text-align:center">&#x5BF9;&#x4E8E;&#x6BCF;&#x6B21;&#x547D;&#x4E2D;&#xFF0C;&#x5305;&#x542B;&#x5982;&#x4F55;&#x8BA1;&#x7B97;&#x547D;&#x4E2D;&#x5206;&#x6570;&#x7684;&#x8BF4;&#x660E;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">_source</td>
+<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#x7684;&#x7EC4;&#x7EC7;&#x548C;&#x7ED3;&#x6784;&#xFF08;Schema&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">stored_fields</td>
+<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#xFF08;Database&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">sort</td>
+<td style="text-align:center">&#x4E00;&#x884C;&#x6570;&#x636E;&#xFF08;Row&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">track_scores</td>
 <td style="text-align:center">&#x4E00;&#x5217;&#x6570;&#x636E;&#xFF08;Column&#xFF09;</td>
 </tr>
 <tr>
-<td style="text-align:center">&#x6620;&#x5C04;&#xFF08;mapping&#xFF09;</td>
+<td style="text-align:center">track_total_hits</td>
+<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#x7684;&#x7EC4;&#x7EC7;&#x548C;&#x7ED3;&#x6784;&#xFF08;Schema&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">lenient</td>
+<td style="text-align:center">&#x4E00;&#x884C;&#x6570;&#x636E;&#xFF08;Row&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">explain</td>
+<td style="text-align:center">&#x4E00;&#x5217;&#x6570;&#x636E;&#xFF08;Column&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">timeout</td>
+<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#x7684;&#x7EC4;&#x7EC7;&#x548C;&#x7ED3;&#x6784;&#xFF08;Schema&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">terminate_after</td>
+<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#xFF08;Database&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">from</td>
+<td style="text-align:center">&#x4E00;&#x884C;&#x6570;&#x636E;&#xFF08;Row&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">size</td>
+<td style="text-align:center">&#x4E00;&#x5217;&#x6570;&#x636E;&#xFF08;Column&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">search_type</td>
+<td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#x7684;&#x7EC4;&#x7EC7;&#x548C;&#x7ED3;&#x6784;&#xFF08;Schema&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">allow_partial_search_results</td>
 <td style="text-align:center">&#x6570;&#x636E;&#x5E93;&#x7684;&#x7EC4;&#x7EC7;&#x548C;&#x7ED3;&#x6784;&#xFF08;Schema&#xFF09;</td>
 </tr>
 </tbody>
@@ -574,7 +640,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"URI搜索","level":"1.2.4.1","depth":3,"next":{"title":"distinct统计","level":"1.2.4.2","depth":3,"path":"first/part04/distinct_search.md","ref":"first/part04/distinct_search.md","articles":[]},"previous":{"title":"简单搜索","level":"1.2.4","depth":2,"path":"first/part04/README.md","ref":"first/part04/README.md","articles":[{"title":"URI搜索","level":"1.2.4.1","depth":3,"path":"first/part04/lite_search.md","ref":"first/part04/lite_search.md","articles":[]},{"title":"distinct统计","level":"1.2.4.2","depth":3,"path":"first/part04/distinct_search.md","ref":"first/part04/distinct_search.md","articles":[]},{"title":"精准查询","level":"1.2.4.3","depth":3,"path":"first/part04/term_search.md","ref":"first/part04/term_search.md","articles":[]},{"title":"组合过滤查询","level":"1.2.4.4","depth":3,"path":"first/part04/compound_filter_query.md","ref":"first/part04/compound_filter_query.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","expandable-chapters","hide-element","github","github-buttons","sharing-plus","anchor-navigation-ex","code","lightbox","tbfed-pagefooter","copy-code-button","search-plus","back-to-top-button","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy Songbai Yang","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD"},"github":{"url":"https://github.com/yangsongbai"},"livereload":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"lightbox":{"jquery":true,"sameUuid":false},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"yangsongbai","repo":"elasticsearch-share","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"expandable-chapters":{},"search-plus":{}},"theme":"default","author":"杨松柏","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"elastscsearch-share","language":"zh-hans","links":{"sidebar":{"CSDN博客":"https://blog.csdn.net/yang52017","个人微信公众号":"https://mp.weixin.qq.com/s/6J7d4EVw6uX3Im9sbXW6WQ"}},"gitbook":"3.2.3","sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"anchor-navigation-ex":{"showLevel":false,"isShowTocTitleIcon":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right"},"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"description":"简单描素"},"file":{"path":"first/part04/lite_search.md","mtime":"2021-05-30T16:06:07.124Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-30T15:54:33.775Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"URI搜索","level":"1.2.4.1","depth":3,"next":{"title":"distinct统计","level":"1.2.4.2","depth":3,"path":"first/part04/distinct_search.md","ref":"first/part04/distinct_search.md","articles":[]},"previous":{"title":"简单搜索","level":"1.2.4","depth":2,"path":"first/part04/README.md","ref":"first/part04/README.md","articles":[{"title":"URI搜索","level":"1.2.4.1","depth":3,"path":"first/part04/lite_search.md","ref":"first/part04/lite_search.md","articles":[]},{"title":"distinct统计","level":"1.2.4.2","depth":3,"path":"first/part04/distinct_search.md","ref":"first/part04/distinct_search.md","articles":[]},{"title":"精准查询","level":"1.2.4.3","depth":3,"path":"first/part04/term_search.md","ref":"first/part04/term_search.md","articles":[]},{"title":"组合过滤查询","level":"1.2.4.4","depth":3,"path":"first/part04/compound_filter_query.md","ref":"first/part04/compound_filter_query.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","expandable-chapters","hide-element","github","github-buttons","sharing-plus","anchor-navigation-ex","code","lightbox","tbfed-pagefooter","copy-code-button","search-plus","back-to-top-button","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy Songbai Yang","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD"},"github":{"url":"https://github.com/yangsongbai"},"livereload":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"lightbox":{"jquery":true,"sameUuid":false},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"yangsongbai","repo":"elasticsearch-share","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"expandable-chapters":{},"search-plus":{}},"theme":"default","author":"杨松柏","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"elastscsearch-share","language":"zh-hans","links":{"sidebar":{"CSDN博客":"https://blog.csdn.net/yang52017","个人微信公众号":"https://mp.weixin.qq.com/s/6J7d4EVw6uX3Im9sbXW6WQ"}},"gitbook":"3.2.3","sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"anchor-navigation-ex":{"showLevel":false,"isShowTocTitleIcon":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right"},"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"description":"简单描素"},"file":{"path":"first/part04/lite_search.md","mtime":"2021-05-30T16:23:25.077Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-30T16:12:20.966Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
