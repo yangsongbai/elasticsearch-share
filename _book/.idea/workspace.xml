@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0ddc1bd2-72d0-40b6-ba8b-55d3e90e2d7b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_book/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_book/elasticsearch-share.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/_book/elasticsearch-share.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_book/first/part01/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part01/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_book/first/part02/analyzer_example.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/analyzer_example.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_book/first/part02/basic_concept.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/basic_concept.html" afterDir="false" />
@@ -19,8 +19,7 @@
       <change beforePath="$PROJECT_DIR$/_book/first/part04/term_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part04/term_search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_book/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_book/search_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/_book/search_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/search_plus_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/_book/search_plus_index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/part04/lite_search.md" beforeDir="false" afterPath="$PROJECT_DIR$/first/part04/lite_search.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first/part03/document_operator.md" beforeDir="false" afterPath="$PROJECT_DIR$/first/part03/document_operator.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +51,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1622390888258</updated>
-      <workItem from="1622390891360" duration="892000" />
+      <workItem from="1622390891360" duration="1343000" />
+      <workItem from="1622424474345" duration="1872000" />
     </task>
     <servers />
   </component>
