@@ -46,7 +46,7 @@ POST /_xpack/sql?format=txt
 ```
 
 ```
-GET /my_store/products/_search
+GET /my_store/_search
 {
    "query" : {
             "bool" : {
