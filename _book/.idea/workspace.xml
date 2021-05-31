@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0ddc1bd2-72d0-40b6-ba8b-55d3e90e2d7b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/install-elasticsearch.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/install-jdk.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/elasticsearch-share.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/_book/elasticsearch-share.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part01/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part01/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part02/analyzer_example.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/analyzer_example.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part02/basic_concept.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/basic_concept.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part02/elasticsearch_lucene_segments.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/elasticsearch_lucene_segments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part02/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part02/invert_index_simple_apply.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part02/invert_index_simple_apply.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part03/document_operator.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part03/document_operator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part03/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part03/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part04/compound_filter_query.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part04/compound_filter_query.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part04/distinct_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part04/distinct_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part04/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part04/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part04/lite_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part04/lite_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/first/part04/term_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/first/part04/term_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_book/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_book/search_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/_book/search_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/first/part03/document_operator.md" beforeDir="false" afterPath="$PROJECT_DIR$/first/part03/document_operator.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first/part04/lite_search.md" beforeDir="false" afterPath="$PROJECT_DIR$/first/part04/lite_search.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gitbook.md" beforeDir="false" afterPath="$PROJECT_DIR$/gitbook.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,11 +59,22 @@
       <option name="presentableId" value="Default" />
       <updated>1622390888258</updated>
       <workItem from="1622390891360" duration="1343000" />
-      <workItem from="1622424474345" duration="1872000" />
+      <workItem from="1622424474345" duration="5048000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
