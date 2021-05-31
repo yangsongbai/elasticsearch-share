@@ -37,7 +37,7 @@ PUT cars
   }
 ```
 
-插入数据   
+插入数据   ~~~~
 ```
 POST /cars/_doc/_bulk
 { "index": {}}
