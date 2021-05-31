@@ -20,13 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ddc1bd2-72d0-40b6-ba8b-55d3e90e2d7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/install-elasticsearch.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/install-jdk.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/part03/document_operator.md" beforeDir="false" afterPath="$PROJECT_DIR$/first/part03/document_operator.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/part04/lite_search.md" beforeDir="false" afterPath="$PROJECT_DIR$/first/part04/lite_search.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gitbook.md" beforeDir="false" afterPath="$PROJECT_DIR$/gitbook.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elasticsearch-share.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/elasticsearch-share.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +43,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -59,7 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1622390888258</updated>
       <workItem from="1622390891360" duration="1343000" />
-      <workItem from="1622424474345" duration="5048000" />
+      <workItem from="1622424474345" duration="6058000" />
     </task>
     <servers />
   </component>
