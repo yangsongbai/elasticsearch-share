@@ -1,4 +1,5 @@
 # 资料  
+右键，在新浏览器窗口中打开           
 Download PPT:  [Elasticsearch分享第一期PPT](elasticsearch-share-first.pptx)   
 Download PDF: [Elasticsearch第一期文档](elasticsearch-share.pdf)
 
