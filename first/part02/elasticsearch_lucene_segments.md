@@ -32,6 +32,47 @@
         Setting.boolSetting("index.merge.scheduler.auto_throttle", true, Property.Dynamic, Property.IndexScope);
 
 ```
+### Stored Fields  
+Stored Fields是一个简单的键值对key-value
+默认情况下所有字段存储在_source字段下；
+```
+PUT elasticsearch-store-fields
+{
+   "mappings": {
+      "_doc": {
+         "properties": {
+            "counter": {
+               "type": "integer",
+               "store": false       
+            },
+            "tags": {
+               "type": "keyword",
+               "store": true     
+            }
+         }
+      }
+   }
+}
+```
+
+```
+PUT elasticsearch-store-fields/_doc/1
+{
+    "counter" : 1,
+    "tags" : ["red"]
+}
+```
+
+```
+GET elasticsearch-store-fields/_doc/1?stored_fields=tags,counter  
+GET elasticsearch-store-fields/_search?stored_fields=tags,counter
+```
+
+###  Document Values  
+以文件字段为单位进行列式存储；适用场景：排序、聚合、权重记分；
+
+
+
 
 ## translog
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/index-modules-translog.html)
