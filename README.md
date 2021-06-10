@@ -1,6 +1,6 @@
 # 资料  
 右键，在新浏览器窗口中打开           
-Download PPT:  [Elasticsearch分享第一期PPT](elasticsearch-share-first.pptx)   
+Download PPT:  [Elasticsearch分享第一期PPT](elasticsearch-share-first.pdf)   
 Download PDF: [Elasticsearch第一期文档](elasticsearch-share.pdf)
 
 部署环境为centos7+,jdk1.8,elasticsearch6.4.0     

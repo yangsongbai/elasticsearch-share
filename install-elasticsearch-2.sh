@@ -11,6 +11,16 @@ else
     echo $local_ip
 fi
 
+#判断jdk是否安装。
+avalabejava=`whereis java| awk '{ print $2}'`
+if [[ $avalabejava =~ java ]];then
+    echo "$avalabejava include java"
+else
+    wget -P /usr/local/src https://static0.xesimg.com/elkpackage/shell/install-jjdk.sh
+    /usr/bin/bash   /usr/local/src/install-jjdk.sh
+    source /etc/profile
+fi
+
 master1=${local_ip}:9500
 loghome=/home/logs/elasticsearch
 data_home=/elasticsearch/data
