@@ -16,6 +16,11 @@ Download install-elasticsearch.sh: [Elasticsearch单节点部署脚本](install-
 
  **《[Elasticsearch:权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html) 》**      
   
- **《[kibana使用手册官方中文文档](https://www.elastic.co/guide/cn/kibana/current/index.html) 》**      
+ **《[kibana使用手册官方中文文档](https://www.elastic.co/guide/cn/kibana/current/index.html) 》**  
  
+ **《[Elastic Stack 实战手册](https://developer.aliyun.com/topic/elasticstack/playbook) 》**      
+ 
+ ![avatar](images/authour.jpeg)  
 
+# 技术交流    
+![avatar](images/zhiyinlou.png)  
