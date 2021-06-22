@@ -147,6 +147,8 @@ green  open   operator_document_index-2021-05-31 7dazxoVrTT2qrQCbBJNe4w   1   0 
 ## 获取文档   
 
 ```
-http://39.104.94.193:9200/operator_document_index-2021-05-31/_search
+GET operator_document_index-2021-05-31/log/1
+
+http://39.104.94.193:9200/operator_document_index-2021-05-31/log/1
 ```
 

@@ -10,10 +10,11 @@
     * [segment_merge](first/part02/segment_merge.md) 
   * [文档操作](first/part03/README.md)  
     * [文档操作](first/part03/document_operator.md)    
-  * [简单搜索实战](first/part04/README.md)    
+  * [分布式搜索](first/part04/README.md)   
+    * [scroll和search_after查询](first/part04/scrolll_search_after.md)   
     * [URI搜索](first/part04/lite_search.md)    
     * [distinct统计](first/part04/distinct_search.md)   
     * [精准查询](first/part04/term_search.md)   
-    * [组合过滤查询](first/part04/compound_filter_query.md)   
+    * [组合过滤查询](first/part04/compound_filter_query.md)  
     
   

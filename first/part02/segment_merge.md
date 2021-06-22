@@ -39,15 +39,18 @@ org.elasticsearch.index.MergePolicyConfig.java
 ```
 
 ```
-index.compound_format:
-index.merge.policy.expunge_deletes_allowed:
-index.merge.policy.floor_segment:
-index.merge.policy.max_merge_at_once:
-index.merge.policy.max_merge_at_once_explicit:
-index.merge.policy.max_merged_segment:
-index.merge.policy.segments_per_tier:
-index.merge.policy.reclaim_deletes_weight:
-
+ 如果合并的段是小于总索引的此百分比，然后将其写在复合格式，否则它被写入以非复合格式, 
+默认值0.1。该属性可用于系统出现文件句柄数量太多错误时使用，但是会降低搜索和索引的性能。
+index.compound_format:  
+index.merge.policy.expunge_deletes_allowed: 默认值为10，该值用于确定被删除文档的百分比，当执行expungeDeletes时，该参数值用于确定索引段是否被合并。
+index.merge.policy.floor_segment:  默认2MB，小于该值的segment优先被合并
+index.merge.policy.max_merge_at_once:  默认10,一次最多合并多少segment
+index.merge.policy.max_merge_at_once_explicit: 默认30, 显式调用一次最多合并多少个segment
+index.merge.policy.max_merged_segment:   默认5GB，超过该值的segment不合并
+index.merge.policy.segments_per_tier:  每一轮merge的segment的允许数量。较小的值会导致较多的merge发生，但是最终的segment数目会较少。
+默认是10.注意，这个值的设置要大于等于max_merge_at_once。否则将会导致太多merge发生。
+index.merge.policy.reclaim_deletes_weight:  ;考虑merge的segment 时删除文档数量多少的权重，默认即可
+默认值为2.0，该属性指定了删除文档在合并操作中的重要程度。如果属性值设置为0，删除文档对合并段的选择没有影响。其值越高，表示删除文档在对待合并段的选择影响越大。
 ```
 
 ## merge调度    
@@ -68,8 +71,9 @@ public static final Setting<Integer> MAX_THREAD_COUNT_SETTING =
 ```
 
 ```
+控制并发的merge线程数，如果存储是并发性能较好的SSD，可以用系统默认的max(1, min(4, availableProcessors / 2))，
+当节点配置的cpu核数较高时，merge占用的资源可能会偏高，影响集群的性能，普通磁盘的话设为1
 index.merge.scheduler.max_thread_count:
-Math.max(1, Math.min(4, 配置的可使用CPU数/ 2))
 
 index.merge.scheduler.max_merge_count:
 MAX_THREAD_COUNT_SETTING.get(s) + 5
@@ -77,3 +81,4 @@ MAX_THREAD_COUNT_SETTING.get(s) + 5
 index.merge.scheduler.auto_throttle: true
 
 ```
+
