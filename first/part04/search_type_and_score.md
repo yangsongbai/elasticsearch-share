@@ -2,9 +2,30 @@
 
 ## query_then_fetch   
 
+```
+GET /my_store/_search?search_type=query_then_fetch
+{
+  "query": {
+    "match": {
+      "productID": "KDKE"
+    }
+  }
+}
+```
 
 ## dfs_query_then_fetch    
 
+```
+GET /my_store/_search?search_type=dfs_query_then_fetch
+{
+  "query": {
+    "match": {
+      "productID": "KDKE"
+    }
+  }
+}
+
+```
 
 ## 计算得分示例     
 
